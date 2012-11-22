@@ -1,5 +1,6 @@
 #include <QGLContext>
 
+#if QT_VERSION <= 0x040803 // if less or equal to 4.8.3
 void* select_3_2_mac_visual(GDHandle handle)
 {
     static const int Max = 40;
@@ -20,3 +21,4 @@ void* select_3_2_mac_visual(GDHandle handle)
  
     return [[NSOpenGLPixelFormat alloc] initWithAttributes:attribs];
 }
+#endif

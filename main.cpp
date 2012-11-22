@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "GLWidget.h"
 #include <QApplication>
 #include <QtGui>
 #include <QString>

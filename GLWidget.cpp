@@ -1,4 +1,5 @@
-#include "mainwindow.h"
+#include "GLWidget.h"
+#include "Core3_2_context.h"
 
 #include <QDebug>
 #include <QKeyEvent>

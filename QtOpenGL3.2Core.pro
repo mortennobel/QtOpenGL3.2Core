@@ -11,17 +11,23 @@ QT += opengl
 win32:INCLUDEPATH *= "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include"
 win32:LIBS *= "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\glew32.lib"
 
-mac:LIBS += -framework Foundation -framework Cocoa
-mac:OBJECTIVE_SOURCES  +=  core_profile_attributes.mm
+mac{
+    eval(QT_MAJOR_VERSION = "4") {
+        LIBS += -framework Foundation -framework Cocoa
+        OBJECTIVE_SOURCES  +=  core_profile_attributes.mm
+    }
+}
 
 TARGET = QtOpenGL32Core
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp \
+    GLWidget.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    GLWidget.h \
+    Core3_2_context.h
 
 OTHER_FILES += \
     simple.frag \

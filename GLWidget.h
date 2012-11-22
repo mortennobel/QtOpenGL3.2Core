@@ -32,19 +32,4 @@ private:
     GLuint m_vertexBuffer;
 };
 
-#if defined(Q_OS_MAC)
-void* select_3_2_mac_visual(GDHandle handle);
-#endif
-
-struct Core3_2_context : public QGLContext {
-    Core3_2_context(const QGLFormat& format, QPaintDevice* device) : QGLContext(format,device) {}
-    Core3_2_context(const QGLFormat& format) : QGLContext(format) {}
-
-#if defined(Q_OS_MAC)
-    virtual void* chooseMacVisual(GDHandle handle) {
-        return select_3_2_mac_visual(handle);
-    }
-#endif
-};
-
 #endif // GLWIDGET_H
