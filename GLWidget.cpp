@@ -107,26 +107,29 @@ void GLWidget::initializeGL()
 
     QGLFormat glFormat = QGLWidget::format();
     // Set the clear color to black
-    glClearColor( 0.0f, 1.0f, 0.0f, 1.0f );
+    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     qDebug() << "OpenGL version "<<QString::fromStdString(string((const char*)glGetString(GL_VERSION)))
              << "GLSL "<<QString::fromStdString(string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
     // Prepare a complete shader program...
     m_shader = prepareShaderProgram( ":/simple.vert", ":/simple.frag" );
 
-    // We need us some vertex data. Start simple with a triangle ;-)
-    float points[] = { -0.5f, -0.5f, 0.0f, 1.0f,
-                        0.5f, -0.5f, 0.0f, 1.0f,
-                        0.0f,  0.5f, 0.0f, 1.0f };
+    // Create a interleaved triangle (vec3 position, vec3 color)
+    float points[] = { -0.5f, -0.5f, 0.0f, 1.0f, 0.0, 0.0,
+                        0.5f, -0.5f, 0.0f, 0.0f, 1.0, 0.0,
+                        0.0f,  0.5f, 0.0f, 0.0f, 0.0, 1.0,  };
     glGenVertexArrays(1, &m_vertexBuffer);
     glBindVertexArray(m_vertexBuffer);
     GLuint  vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, 3 * 4 * sizeof(float), points, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 3 * 6 * sizeof(float), points, GL_STATIC_DRAW);
     GLuint positionAttribute = glGetAttribLocation(m_shader, "vertex");
+    GLuint colorAttribute = glGetAttribLocation(m_shader, "color");
     glEnableVertexAttribArray(positionAttribute);
-    glVertexAttribPointer(positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(float)*3, (const GLvoid *)0);
+    glVertexAttribPointer(positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, (const GLvoid *)0);
+    glEnableVertexAttribArray(colorAttribute);
+    glVertexAttribPointer(colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, (const GLvoid *)(sizeof(float)*3));
 }
 
 void GLWidget::resizeGL( int w, int h )
