@@ -5,7 +5,7 @@ An example of creating an OpenGL 3.2 core profile context using Qt 4.8 crossplat
 
 The project compiles under Qt 4.8.1 or later.
 
-On Windows it requires GLEW (http://glew.sourceforge.net/) to access the OpenGL functions.
+On Windows it requires GLEW (http://glew.sourceforge.net/) to access the OpenGL functions. You might need to update the GLEW path in the .pro file. 
 
 On Windows tested on Qt 4.8.1 using VS 2010.
 
