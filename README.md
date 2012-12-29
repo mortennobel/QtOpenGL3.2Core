@@ -1,7 +1,7 @@
 QtOpenGL3.2Core
 ===============
 
-An example of creating an OpenGL 3.2 core profile context using Qt 4.8 crossplatform.
+An example of creating an OpenGL 3.2 core profile context using Qt 4.8/5.x crossplatform.
 
 The project compiles under Qt 4.8.1 or later.
 
