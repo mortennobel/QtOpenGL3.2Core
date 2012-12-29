@@ -23,11 +23,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    GLWidget.cpp
+    GLWidget.cpp \
+    glheader.cpp
 
 HEADERS  += \
     GLWidget.h \
-    Core3_2_context.h
+    Core3_2_context.h \
+    glheader.h
 
 OTHER_FILES += \
     simple.frag \

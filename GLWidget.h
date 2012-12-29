@@ -3,11 +3,7 @@
 
 #include <QtGlobal>
 
-#if defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
-#include <GL/glew.h>
-#else
-#include <OpenGL/gl3.h>
-#endif
+#include "glheader.h"
 
 #include <QGLContext>
 #include <QGLWidget>

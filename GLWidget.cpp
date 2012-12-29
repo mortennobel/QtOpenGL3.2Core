@@ -94,22 +94,7 @@ GLuint GLWidget::prepareShaderProgram( const QString& vertexShaderPath,
 
 void GLWidget::initializeGL()
 {
-#if defined(Q_OS_WIN32)
-    glewExperimental = true;
-    GLint GlewInitResult = glewInit();
-    if (GlewInitResult != GLEW_OK) {
-        const GLubyte* errorStr = glewGetErrorString(GlewInitResult);
-        int size = strlen(reinterpret_cast<const char*>(errorStr));
-        qDebug() <<"Glew error "<<QString::fromUtf8(reinterpret_cast<const char*>(errorStr), size);
-
-    }
-#endif
-
-    QGLFormat glFormat = QGLWidget::format();
-    // Set the clear color to black
-    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
-    qDebug() << "OpenGL version "<<QString::fromStdString(string((const char*)glGetString(GL_VERSION)))
-             << "GLSL "<<QString::fromStdString(string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
+    glSetup();
 
     // Prepare a complete shader program...
     m_shader = prepareShaderProgram( ":/simple.vert", ":/simple.frag" );
@@ -130,12 +115,14 @@ void GLWidget::initializeGL()
     glVertexAttribPointer(positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, (const GLvoid *)0);
     glEnableVertexAttribArray(colorAttribute);
     glVertexAttribPointer(colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(float)*6, (const GLvoid *)(sizeof(float)*3));
+    glCheckError();
 }
 
 void GLWidget::resizeGL( int w, int h )
 {
     // Set the viewport to window dimensions
     glViewport( 0, 0, w, qMax( h, 1 ) );
+    glCheckError();
 }
 
 void GLWidget::paintGL()
@@ -145,5 +132,6 @@ void GLWidget::paintGL()
 
     // Draw stuff
     glDrawArrays( GL_TRIANGLES, 0, 3 );
+    glCheckError();
 }
 
