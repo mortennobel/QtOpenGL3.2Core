@@ -13,7 +13,7 @@ void* select_3_2_mac_visual(GDHandle handle)
     attribs[cnt++] = NSOpenGLPFADoubleBuffer;
    
     attribs[cnt++] = NSOpenGLPFADepthSize;
-    attribs[cnt++] = (NSOpenGLPixelFormatAttribute)16;
+    attribs[cnt++] = (NSOpenGLPixelFormatAttribute)32;
    
     attribs[cnt] = 0;
     Q_ASSERT(cnt < Max);
