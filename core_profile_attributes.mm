@@ -1,6 +1,6 @@
 #include <QGLContext>
 
-#if QT_VERSION <= 0x040803 // if less or equal to 4.8.3
+#if QT_VERSION < 0x050000 // if less than 5.0.0
 void* select_3_2_mac_visual(GDHandle handle, int depthBufferSize)
 {
     static const int Max = 40;
